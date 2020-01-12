@@ -2,7 +2,53 @@
 
 {{#partial "content"}}
 
+    <div class="jumbotron text-center">
 
+        <h3>Wildlife Tracker</h3>
+
+
+
+    </div>
+    <div class="col-md-6 text-center">
+        <h2>Post Sighting </h2>
+        <form action="/postSighting" method="post" class="p-2" id="regHero">
+            <label for="animalName">Animal Sighted</label>
+            <input type="text" class="form-control" name="animalName" placeholder=" Name of Animal sighted" required>
+
+            <label for="age">Animal's Age</label>
+            <select class="form-control" id="inlineFormCustomSelect" name="age" required>
+                <option >Choose... Animal's Age</option>
+                <option selected value="new-born">New Born</option>
+                <option value="young">Young</option>
+                <option value="adult">Adult</option>
+            </select>
+
+            <label for="health">Animal's Health</label>
+            <select class="form-control" id="inlineFormCustomSelect" name="health" required>
+                <option >Choose... Animal's Health</option>
+                <option selected value="okay">Okay</option>
+                <option value="ill">Ill</option>
+
+            </select>
+
+            <label for="location">Sighting location</label>
+            <select class="form-control" id="inlineFormCustomSelect" name="location" required>
+                <option >Choose... Sighting location</option>
+                <option selected value="zone_A">Zone A</option>
+                <option value="zone_B">Zone B</option>
+                <option value="zone_C">Zone C</option>
+                <option value="zone_D">Zone D</option>
+                <option value="zone_E">Zone E</option>
+
+
+            </select>
+
+
+
+            <button type="submit" class="btn btn-primary">Register</button>
+
+        </form>
+    </div>
 
 
 
