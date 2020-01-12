@@ -1,4 +1,3 @@
-package models;
 import org.sql2o.Connection;
 
 import java.util.List;
@@ -6,14 +5,19 @@ import java.util.List;
 public class Animals {
     private String name;
     private String age;
-    private Boolean endangered;
-    private Boolean healthy;
+    private String endangered;
+    private String healthy;
+    private int id;
 
-    public Animals(String name, String age, Boolean endangered, Boolean healthy) {
+    public Animals(String name, String age, String endangered,String  healthy) {
         this.name = name;
         this.age = age;
         this.endangered = endangered;
         this.healthy = healthy;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -24,11 +28,13 @@ public class Animals {
         return age;
     }
 
-    public Boolean getEndangered() {
+
+
+    public String getEndangered() {
         return endangered;
     }
 
-    public Boolean getHealthy() {
+    public String getHealthy() {
         return healthy;
     }
 
@@ -47,12 +53,31 @@ public class Animals {
 
     public void save() {
         try(Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO persons (name, email) VALUES (:name, :email)";
+            String sql = "INSERT INTO animals (name, age,endangered,healthy) VALUES (:name, :age,:endangered,:healthy)";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
-                    .addParameter("email", this.email)
+                    .addParameter("age", this.age)
+                    .addParameter("endangered", this.endangered)
+                    .addParameter("healthy", this.healthy)
                     .executeUpdate()
                     .getKey();
+        }
+    }
+
+    public static List<Animals> all() {
+        String sql = "SELECT * FROM animals";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Animals.class);
+        }
+    }
+
+    public static Animals find(int id) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM persons where id=:id";
+            Animals Animal = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Animals.class);
+            return Animal;
         }
     }
 
