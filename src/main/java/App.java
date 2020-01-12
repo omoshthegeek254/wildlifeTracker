@@ -1,8 +1,34 @@
-import static spark.Spark.staticFileLocation;
+import models.Animals;
+import org.sql2o.Sql2o;
+import spark.ModelAndView;
+import spark.template.handlebars.HandlebarsTemplateEngine;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static spark.Spark.*;
 
 public class App {
-    public static void main (String [] args){
+
+    public static void main(String[]args) {
         staticFileLocation( "/public");
 
+        get("/", (request, response) -> {
+
+
+            Map<String, Object> model = new HashMap<String, Object>();
+//            ArrayList<Animal> allHeroes = .getAllHeroes();
+//            ArrayList<Squads> allSquads = Squads.getAllSquads();
+//
+//            model.put("allHeroes", allHeroes);
+//            model.put("allSquads", allSquads);
+
+
+//            return new ModelAndView(model,"index.hbs");
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
     }
+
 }
