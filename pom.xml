@@ -11,19 +11,28 @@
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-core</artifactId>
-            <version>2.2</version>
+            <version>2.6.0</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-template-handlebars</artifactId>
             <version>2.5.5</version>
         </dependency>
+        <!-- postgress -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.2</version>
+        </dependency>
+        <!-- postgress dependency -->
         <dependency>
             <groupId>org.sql2o</groupId>
             <artifactId>sql2o</artifactId>
