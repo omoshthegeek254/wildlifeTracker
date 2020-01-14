@@ -1,11 +1,8 @@
-import models.Animals;
-import org.sql2o.Sql2o;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -19,16 +16,38 @@ public class App {
 
 
             Map<String, Object> model = new HashMap<String, Object>();
-//            ArrayList<Animal> allHeroes = .getAllHeroes();
-//            ArrayList<Squads> allSquads = Squads.getAllSquads();
-//
-//            model.put("allHeroes", allHeroes);
-//            model.put("allSquads", allSquads);
+            ArrayList<Animal> allAnimals = (ArrayList<Animal>) Animal.all();
+            ArrayList<Sighting> allSighting = (ArrayList<Sighting>) Sighting.all();
+
+            model.put("allSighting", allSighting);
+            model.put("allAnimals", allAnimals);
 
 
-//            return new ModelAndView(model,"index.hbs");
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
+
+
+
+
+        post("/post_sighting", (req, res) -> { //new
+            Map<String, Object> model = new HashMap<>();
+            String name = req.queryParams("name");
+            String age = req.queryParams("age");
+            String healthy = req.queryParams("healthy");
+            String endangered = req.queryParams("endangered");
+            String location = req.queryParams("location");
+            String ranger = req.queryParams("ranger");
+
+            Animal newAnimal = new Animal(name, age,endangered,healthy);
+            Sighting newSighting = new Sighting(location,ranger);
+            newAnimal.save();
+            newSighting.save();
+//            System.out.println(newAnimal);
+            return new ModelAndView(model, "postsuccessful.hbs");
+        }, new HandlebarsTemplateEngine());
     }
+
+
+
 
 }
